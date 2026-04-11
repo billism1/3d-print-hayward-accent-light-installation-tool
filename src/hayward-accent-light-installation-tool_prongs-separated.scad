@@ -106,14 +106,13 @@ module prong_slots() {
                 prong_slot();
 }
 
-// Individual prongs laid out for separate printing (on their sides)
+// Individual prongs positioned just outside the disc near their respective slots
 module prongs_for_printing() {
-    prong_total_h = prong_height + dish_depth + prong_insert + eps;
+    prong_gap = 4;  // mm – gap between disc outer edge and prong outer edge
     for (i = [0 : prong_count - 1])
-        translate([disc_diameter + 5 + i * (prong_total_h + 5), 0, 0])
-            rotate([0, -90, 0])
-                translate([0, 0, -prong_insert])  // center so insertion tab is at bottom
-                    prong_with_tab();
+        rotate([0, 0, i * (360 / prong_count)])
+            translate([prong_gap, 0, disc_thickness - dish_depth])
+                prong_with_tab();
 }
 
 // Cutout slots in the bottom of the disc for the handle tabs
