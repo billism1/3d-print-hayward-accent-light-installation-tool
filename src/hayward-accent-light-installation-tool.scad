@@ -39,6 +39,12 @@ collar_ledge_width     = 10;     // mm – radial width of the prong ledge ring 
 collar_ledge_height    = 3;      // mm – height the ledge extrudes above the collar
 collar_tooth_taper_h   = 12;     // mm – height of 45° taper on bottom of teeth (= tooth thickness)
 
+// Collar prong parameters
+collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
+collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
+collar_prong_count     = 3;      // number of prongs, evenly spaced
+collar_prong_ring_od   = 100;    // mm – outer diameter of the hypothetical ring defining arc curvature
+
 // Interlocking tab parameters
 tab_count       = 3;
 tab_width       = 5;      // mm – width tangentially
@@ -63,6 +69,12 @@ collar_total_thickness = collar_base_thickness + collar_tooth_thickness;
 collar_outer_radius = collar_inner_radius + collar_total_thickness;  // full outer radius including teeth
 collar_base_outer_radius = collar_inner_radius + collar_base_thickness; // outer radius of base ring
 collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular cutout
+
+// Collar prong derived dimensions
+collar_prong_ring_or = collar_prong_ring_od / 2;                       // 50 mm
+collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;  // 47.5 mm
+// Offset the ring center so its near-side arc sits at the collar bore inner edge
+collar_prong_ring_offset = collar_inner_radius + collar_prong_ring_or;
 
 // ----- Quality -----
 $fn = 80;
@@ -177,13 +189,38 @@ module grip_collar() {
                          h = collar_tooth_taper_h + eps);
             }
     }
-    // Prong ledge: ring on top (+Z) surface for future arced prongs
+    // Prong ledge: ring on top (+Z) surface for arced prongs
     translate([0, 0, collar_height])
         difference() {
             cylinder(r = collar_inner_radius + collar_ledge_width, h = collar_ledge_height);
             translate([0, 0, -eps])
                 cylinder(r = collar_inner_radius, h = collar_ledge_height + 2 * eps);
         }
+    // Arced prongs on top of the ledge
+    collar_prongs();
+}
+
+// A single prong arc: intersection of a large offset ring with the ledge footprint.
+// The ring is centered along +X so its near-side arc curves across the ledge inner edge.
+module collar_prong() {
+    intersection() {
+        // Hypothetical ring offset along +X
+        translate([collar_prong_ring_offset, 0, 0])
+            difference() {
+                cylinder(r = collar_prong_ring_or, h = collar_prong_height);
+                translate([0, 0, -eps])
+                    cylinder(r = collar_prong_ring_ir, h = collar_prong_height + 2 * eps);
+            }
+        // Clip to the ledge footprint
+        cylinder(r = collar_inner_radius + collar_ledge_width, h = collar_prong_height);
+    }
+}
+
+module collar_prongs() {
+    for (i = [0 : collar_prong_count - 1])
+        rotate([0, 0, i * (360 / collar_prong_count)])
+            translate([0, 0, collar_height + collar_ledge_height])
+                collar_prong();
 }
 
 // ----- Assembly -----
