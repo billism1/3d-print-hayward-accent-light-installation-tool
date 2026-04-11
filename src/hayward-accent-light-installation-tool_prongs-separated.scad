@@ -9,6 +9,8 @@ disc_thickness  = 15;     // mm – depth (Z) of the flat disc
 prong_height    = 2;      // mm – how far prongs extend above the disc
 prong_arc_len   = 4;    // mm – arc length of each prong along circumference
 prong_count     = 3;
+prong_insert    = 5;      // mm – depth of prong tab that inserts into the disc
+prong_clearance = 0.15;   // mm – clearance per side for prong slot in disc
 
 // Concave dish on top of disc (to cradle convex light fixture)
 dish_depth      = 3;      // mm – how deep the concavity is
@@ -16,6 +18,7 @@ dish_depth      = 3;      // mm – how deep the concavity is
 // Render toggles
 render_end_piece = true;
 render_handle    = true;
+render_prongs    = true;
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -47,7 +50,7 @@ slot_width      = tab_width + 2 * tab_clearance;
 slot_depth      = tab_depth + 2 * tab_clearance;
 
 // ----- Quality -----
-$fn = 180;
+$fn = 60;
 
 // ----- Component Modules -----
 
@@ -55,25 +58,62 @@ module disc() {
     cylinder(d1 = disc_diameter, d2 = disc_diameter, h = disc_thickness);
 }
 
-module prong() {
-    prong_total_h = prong_height + dish_depth + eps;
+// Prong cross-section (lens shape from above)
+module prong_profile(h) {
     half_arc = prong_arc_len / 2;
-
-    // Lens shape from above: outer follows disc curvature, inner is convex toward center
     intersection() {
-        // Cylinder centered on disc edge along +X
         translate([disc_radius, 0, 0])
-            cylinder(r = half_arc, h = prong_total_h);
-        // Clip to inside the disc radius
-        cylinder(r = disc_radius, h = prong_total_h);
+            cylinder(r = half_arc, h = h);
+        cylinder(r = disc_radius, h = h);
     }
 }
 
-module prongs() {
+// Full prong: visible part + insertion tab below
+module prong_with_tab() {
+    prong_total_h = prong_height + dish_depth + eps;
+    // Visible prong part
+    prong_profile(prong_total_h);
+    // Insertion tab extending downward into the disc
+    translate([0, 0, -prong_insert])
+        prong_profile(prong_insert);
+}
+
+// All prongs positioned on the disc (for preview)
+module prongs_on_disc() {
     for (i = [0 : prong_count - 1])
         rotate([0, 0, i * (360 / prong_count)])
             translate([0, 0, disc_thickness - dish_depth - eps])
-                prong();
+                prong_with_tab();
+}
+
+// Prong slot cutout (slightly larger than prong for clearance)
+// Extends from insertion depth all the way through the top so prongs insert from above
+module prong_slot() {
+    slot_total_h = prong_insert + dish_depth + eps;
+    half_arc = prong_arc_len / 2 + prong_clearance;
+    intersection() {
+        translate([disc_radius, 0, 0])
+            cylinder(r = half_arc, h = slot_total_h);
+        cylinder(r = disc_radius + prong_clearance, h = slot_total_h);
+    }
+}
+
+// All prong slots cut into the disc – open from the top
+module prong_slots() {
+    for (i = [0 : prong_count - 1])
+        rotate([0, 0, i * (360 / prong_count)])
+            translate([0, 0, disc_thickness - dish_depth - prong_insert])
+                prong_slot();
+}
+
+// Individual prongs laid out for separate printing (on their sides)
+module prongs_for_printing() {
+    prong_total_h = prong_height + dish_depth + prong_insert + eps;
+    for (i = [0 : prong_count - 1])
+        translate([disc_diameter + 5 + i * (prong_total_h + 5), 0, 0])
+            rotate([0, -90, 0])
+                translate([0, 0, -prong_insert])  // center so insertion tab is at bottom
+                    prong_with_tab();
 }
 
 // Cutout slots in the bottom of the disc for the handle tabs
@@ -94,14 +134,14 @@ module dish_cutout() {
         sphere(r = dish_r);
 }
 
-// The disc with slots and concave dish cut out
+// The disc with all slots cut out (handle tabs + prong slots + dish)
 module end_piece() {
     difference() {
         disc();
         disc_slots();
         dish_cutout();
+        prong_slots();
     }
-    prongs();
 }
 
 // Tabs that protrude from the top of the handle
@@ -136,6 +176,9 @@ module handle() {
 // ----- Assembly -----
 if (render_end_piece)
     end_piece();
+
+if (render_prongs)
+    prongs_for_printing();
 
 if (render_handle)
     translate([0, 0, -(handle_length + tab_height + handle_gap)])
