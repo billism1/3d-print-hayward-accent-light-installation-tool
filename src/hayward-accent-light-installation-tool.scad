@@ -3,7 +3,7 @@
 // ============================================================
 
 // ----- Constants & Parameters -----
-disc_diameter   = 29;     // mm – outer diameter of the circular end
+disc_diameter   = 30;     // mm – outer diameter of the circular end
 disc_thickness  = 15;     // mm – depth (Z) of the flat disc
 
 prong_height    = 2;      // mm – how far prongs extend above the disc
@@ -16,7 +16,7 @@ dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
 render_end_piece = true;
-render_handle    = false;
+render_handle    = true;
 
 // Handle parameters
 handle_diameter = 24;     // mm
