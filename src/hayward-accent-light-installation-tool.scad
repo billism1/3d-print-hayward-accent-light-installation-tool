@@ -7,8 +7,7 @@ disc_diameter   = 30;     // mm – outer diameter of the circular end
 disc_thickness  = 15;     // mm – depth (Z) of the flat disc
 
 prong_height    = 2;      // mm – how far prongs extend above the disc
-prong_arc_len   = 3.5;    // mm – arc length of each prong along circumference
-prong_width     = 2;      // mm – radial thickness of each prong (adjustable)
+prong_arc_len   = 4;    // mm – arc length of each prong along circumference
 prong_count     = 3;
 
 // Concave dish on top of disc (to cradle convex light fixture)
@@ -57,14 +56,22 @@ module disc() {
 }
 
 module prong() {
-    rotate_extrude(angle = prong_arc_angle)
-        translate([disc_radius - prong_width, 0])
-            square([prong_width, prong_height + dish_depth + eps]);
+    prong_total_h = prong_height + dish_depth + eps;
+    half_arc = prong_arc_len / 2;
+
+    // Lens shape from above: outer follows disc curvature, inner is convex toward center
+    intersection() {
+        // Cylinder centered on disc edge along +X
+        translate([disc_radius, 0, 0])
+            cylinder(r = half_arc, h = prong_total_h);
+        // Clip to inside the disc radius
+        cylinder(r = disc_radius, h = prong_total_h);
+    }
 }
 
 module prongs() {
     for (i = [0 : prong_count - 1])
-        rotate([0, 0, i * (360 / prong_count) - prong_arc_angle / 2])
+        rotate([0, 0, i * (360 / prong_count)])
             translate([0, 0, disc_thickness - dish_depth - eps])
                 prong();
 }
