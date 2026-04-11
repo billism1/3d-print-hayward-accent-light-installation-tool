@@ -11,9 +11,12 @@ prong_arc_len   = 3.5;    // mm – arc length of each prong along circumference
 prong_width     = 2;      // mm – radial thickness of each prong (adjustable)
 prong_count     = 3;
 
+// Concave dish on top of disc (to cradle convex light fixture)
+dish_depth      = 3;      // mm – how deep the concavity is
+
 // Render toggles
 render_end_piece = true;
-render_handle    = true;
+render_handle    = false;
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -56,13 +59,13 @@ module disc() {
 module prong() {
     rotate_extrude(angle = prong_arc_angle)
         translate([disc_radius - prong_width, 0])
-            square([prong_width, prong_height + eps]);
+            square([prong_width, prong_height + dish_depth + eps]);
 }
 
 module prongs() {
     for (i = [0 : prong_count - 1])
         rotate([0, 0, i * (360 / prong_count) - prong_arc_angle / 2])
-            translate([0, 0, disc_thickness - eps])
+            translate([0, 0, disc_thickness - dish_depth - eps])
                 prong();
 }
 
@@ -76,11 +79,20 @@ module disc_slots() {
                 cube([slot_depth, slot_width, tab_height + eps]);
 }
 
-// The disc with slots cut out of the bottom face
+// Spherical concave dish cut from the top of the disc
+module dish_cutout() {
+    // Sphere radius derived so that a cap of dish_depth has the disc's radius as chord
+    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth);
+    translate([0, 0, disc_thickness - dish_depth + dish_r])
+        sphere(r = dish_r);
+}
+
+// The disc with slots and concave dish cut out
 module end_piece() {
     difference() {
         disc();
         disc_slots();
+        dish_cutout();
     }
     prongs();
 }
