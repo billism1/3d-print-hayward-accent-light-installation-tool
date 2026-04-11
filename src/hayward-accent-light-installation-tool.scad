@@ -4,17 +4,35 @@
 
 // ----- Constants & Parameters -----
 disc_diameter   = 29;     // mm – outer diameter of the circular end
-disc_thickness  = 2;      // mm – depth (Z) of the flat disc
+disc_thickness  = 15;     // mm – depth (Z) of the flat disc
 
 prong_height    = 2;      // mm – how far prongs extend above the disc
-prong_arc_len   = 3.5;      // mm – arc length of each prong along circumference
+prong_arc_len   = 3.5;    // mm – arc length of each prong along circumference
 prong_width     = 2;      // mm – radial thickness of each prong (adjustable)
 prong_count     = 3;
 
+// Handle parameters
+handle_diameter = 25;     // mm
+handle_length   = 80;     // mm
+handle_gap      = 2;      // mm – visual gap between handle and disc
+
+// Interlocking tab parameters
+tab_count       = 3;
+tab_width       = 5;      // mm – width tangentially
+tab_depth       = 4;      // mm – radial depth of each tab
+tab_height      = 6;      // mm – how far tabs protrude into the disc
+tab_radial_pos  = 8;      // mm – distance from center to tab center
+tab_clearance   = 0.15;   // mm – press-fit tolerance per side
+
 // ----- Derived Dimensions -----
 disc_radius     = disc_diameter / 2;
+handle_radius   = handle_diameter / 2;
 prong_arc_angle = (prong_arc_len / (PI * disc_diameter)) * 360; // degrees
 eps             = 0.01;   // mm – tiny overlap to avoid z-fighting
+
+// Slot dimensions (tab + clearance on each side)
+slot_width      = tab_width + 2 * tab_clearance;
+slot_depth      = tab_depth + 2 * tab_clearance;
 
 // ----- Quality -----
 $fn = 180;
@@ -22,7 +40,7 @@ $fn = 180;
 // ----- Component Modules -----
 
 module disc() {
-    cylinder(d = disc_diameter, h = disc_thickness);
+    cylinder(d1 = handle_diameter, d2 = disc_diameter, h = disc_thickness);
 }
 
 module prong() {
@@ -38,6 +56,44 @@ module prongs() {
                 prong();
 }
 
+// Cutout slots in the bottom of the disc for the handle tabs
+module disc_slots() {
+    for (i = [0 : tab_count - 1])
+        rotate([0, 0, i * (360 / tab_count)])
+            translate([tab_radial_pos - slot_depth / 2,
+                       -slot_width / 2,
+                       -eps])
+                cube([slot_depth, slot_width, tab_height + eps]);
+}
+
+// The disc with slots cut out of the bottom face
+module end_piece() {
+    difference() {
+        disc();
+        disc_slots();
+    }
+    prongs();
+}
+
+// Tabs that protrude from the top of the handle
+module handle_tabs() {
+    for (i = [0 : tab_count - 1])
+        rotate([0, 0, i * (360 / tab_count)])
+            translate([tab_radial_pos - tab_depth / 2,
+                       -tab_width / 2,
+                       handle_length])
+                cube([tab_depth, tab_width, tab_height]);
+}
+
+module handle() {
+    cylinder(d = handle_diameter, h = handle_length);
+    handle_tabs();
+}
+
 // ----- Assembly -----
-disc();
-prongs();
+// End piece at origin, prongs pointing up
+end_piece();
+
+// Handle positioned below the disc with a small visual gap
+translate([0, 0, -(handle_length + tab_height + handle_gap)])
+    handle();
