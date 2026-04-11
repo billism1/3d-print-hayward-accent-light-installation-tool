@@ -4,10 +4,10 @@
 
 // ----- Constants & Parameters -----
 disc_diameter   = 29;     // mm – outer diameter of the circular end
-disc_thickness  = 3;      // mm – depth (Z) of the flat disc
+disc_thickness  = 2;      // mm – depth (Z) of the flat disc
 
-prong_height    = 3;      // mm – how far prongs extend above the disc
-prong_arc_len   = 4;      // mm – arc length of each prong along circumference
+prong_height    = 2;      // mm – how far prongs extend above the disc
+prong_arc_len   = 3.5;      // mm – arc length of each prong along circumference
 prong_width     = 2;      // mm – radial thickness of each prong (adjustable)
 prong_count     = 3;
 
@@ -17,7 +17,7 @@ prong_arc_angle = (prong_arc_len / (PI * disc_diameter)) * 360; // degrees
 eps             = 0.01;   // mm – tiny overlap to avoid z-fighting
 
 // ----- Quality -----
-$fn = 64;
+$fn = 180;
 
 // ----- Component Modules -----
 
