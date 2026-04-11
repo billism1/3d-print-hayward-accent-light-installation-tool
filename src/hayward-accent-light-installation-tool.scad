@@ -89,7 +89,7 @@ module disc_slots() {
 // Spherical concave dish cut from the top of the disc
 module dish_cutout() {
     // Sphere radius derived so that a cap of dish_depth has the disc's radius as chord
-    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth);
+    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth) - 9;
     translate([0, 0, disc_thickness - dish_depth + dish_r])
         sphere(r = dish_r);
 }
