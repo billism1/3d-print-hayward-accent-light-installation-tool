@@ -19,7 +19,7 @@ render_handle    = true;
 
 // Handle parameters
 handle_diameter = 24;     // mm
-handle_length   = 80;     // mm
+handle_length   = 50;     // mm
 handle_gap      = 2;      // mm – visual gap between handle and disc
 
 // Handle neck parameters
