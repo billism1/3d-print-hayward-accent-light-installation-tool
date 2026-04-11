@@ -11,6 +11,10 @@ prong_arc_len   = 3.5;    // mm – arc length of each prong along circumference
 prong_width     = 2;      // mm – radial thickness of each prong (adjustable)
 prong_count     = 3;
 
+// Render toggles
+render_end_piece = true;
+render_handle    = true;
+
 // Handle parameters
 handle_diameter = 25;     // mm
 handle_length   = 80;     // mm
@@ -91,9 +95,9 @@ module handle() {
 }
 
 // ----- Assembly -----
-// End piece at origin, prongs pointing up
-end_piece();
+if (render_end_piece)
+    end_piece();
 
-// Handle positioned below the disc with a small visual gap
-translate([0, 0, -(handle_length + tab_height + handle_gap)])
-    handle();
+if (render_handle)
+    translate([0, 0, -(handle_length + tab_height + handle_gap)])
+        handle();
