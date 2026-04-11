@@ -15,7 +15,7 @@ dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
 render_end_piece = true;
-render_handle    = true;
+render_handle    = false;
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -89,7 +89,7 @@ module disc_slots() {
 // Spherical concave dish cut from the top of the disc
 module dish_cutout() {
     // Sphere radius derived so that a cap of dish_depth has the disc's radius as chord
-    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth) - 9;
+    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth) - 2;
     translate([0, 0, disc_thickness - dish_depth + dish_r])
         sphere(r = dish_r);
 }

@@ -16,9 +16,10 @@ prong_clearance = 0.15;   // mm – clearance per side for prong slot in disc
 dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
-render_end_piece = true;
-render_handle    = true;
-render_prongs    = true;
+render_end_piece    = true;
+render_handle       = false;
+render_prongs       = false;
+render_single_prong = false;  // true = render only 1 prong for printing
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -50,7 +51,7 @@ slot_width      = tab_width + 2 * tab_clearance;
 slot_depth      = tab_depth + 2 * tab_clearance;
 
 // ----- Quality -----
-$fn = 60;
+$fn = 180;
 
 // ----- Component Modules -----
 
@@ -109,7 +110,8 @@ module prong_slots() {
 // Individual prongs positioned just outside the disc near their respective slots
 module prongs_for_printing() {
     prong_gap = 4;  // mm – gap between disc outer edge and prong outer edge
-    for (i = [0 : prong_count - 1])
+    prong_render_count = render_single_prong ? 1 : prong_count;
+    for (i = [0 : prong_render_count - 1])
         rotate([0, 0, i * (360 / prong_count)])
             translate([prong_gap, 0, disc_thickness - dish_depth])
                 prong_with_tab();
@@ -128,7 +130,7 @@ module disc_slots() {
 // Spherical concave dish cut from the top of the disc
 module dish_cutout() {
     // Sphere radius derived so that a cap of dish_depth has the disc's radius as chord
-    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth) - 9;
+    dish_r = (disc_radius * disc_radius + dish_depth * dish_depth) / (2 * dish_depth) - 2;
     translate([0, 0, disc_thickness - dish_depth + dish_r])
         sphere(r = dish_r);
 }
