@@ -33,10 +33,11 @@ neck_taper      = 6;      // mm – length of each conical transition
 collar_inner_diameter  = 32;     // mm – inside diameter (end piece sits inside)
 collar_base_thickness  = 10;     // mm – base ring wall thickness
 collar_tooth_thickness = 10;     // mm – additional thickness for gear-tooth region
-collar_height          = 12;     // mm – height when printed flat on bed
+collar_height          = 22;     // mm – height when printed flat on bed
 collar_tooth_count     = 6;      // number of gear-like grip teeth
 collar_ledge_width     = 10;     // mm – radial width of the prong ledge ring on top
 collar_ledge_height    = 3;      // mm – height the ledge extrudes above the collar
+collar_tooth_taper_h   = 12;     // mm – height of 45° taper on bottom of teeth (= tooth thickness)
 
 // Interlocking tab parameters
 tab_count       = 3;
@@ -168,6 +169,13 @@ module grip_collar() {
             rotate([0, 0, i * (360 / collar_tooth_count) + (360 / collar_tooth_count / 2)])
                 translate([collar_outer_radius, 0, -eps])
                     cylinder(r = collar_cutout_radius, h = collar_height + 2 * eps);
+        // 45° taper on bottom of teeth – slopes inward to print without support
+        translate([0, 0, -eps])
+            difference() {
+                cylinder(r = collar_outer_radius + eps, h = collar_tooth_taper_h + eps);
+                cylinder(r1 = collar_base_outer_radius, r2 = collar_outer_radius,
+                         h = collar_tooth_taper_h + eps);
+            }
     }
     // Prong ledge: ring on top (+Z) surface for future arced prongs
     translate([0, 0, collar_height])
