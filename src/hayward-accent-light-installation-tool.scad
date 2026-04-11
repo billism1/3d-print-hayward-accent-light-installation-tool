@@ -14,8 +14,9 @@ prong_count     = 3;
 dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
-render_end_piece = true;
-render_handle    = true;
+render_end_piece  = true;
+render_handle     = true;
+render_grip_collar = true;
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -27,6 +28,13 @@ neck_start      = 12;     // mm – distance from top of handle to start of neck
 neck_diameter   = 17;     // mm – narrowed diameter
 neck_length     = 15;     // mm – length of the narrow section
 neck_taper      = 6;      // mm – length of each conical transition
+
+// Grip collar parameters
+collar_inner_diameter  = 32;     // mm – inside diameter (end piece sits inside)
+collar_base_thickness  = 10;     // mm – base ring wall thickness
+collar_tooth_thickness = 10;     // mm – additional thickness for gear-tooth region
+collar_height          = 15;     // mm – height when printed flat on bed
+collar_tooth_count     = 6;      // number of gear-like grip teeth
 
 // Interlocking tab parameters
 tab_count       = 3;
@@ -45,6 +53,13 @@ eps             = 0.01;   // mm – tiny overlap to avoid z-fighting
 // Slot dimensions (tab + clearance on each side)
 slot_width      = tab_width + 2 * tab_clearance;
 slot_depth      = tab_depth + 2 * tab_clearance;
+
+// Grip collar derived dimensions
+collar_inner_radius = collar_inner_diameter / 2;
+collar_total_thickness = collar_base_thickness + collar_tooth_thickness;
+collar_outer_radius = collar_inner_radius + collar_total_thickness;  // full outer radius including teeth
+collar_base_outer_radius = collar_inner_radius + collar_base_thickness; // outer radius of base ring
+collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular cutout
 
 // ----- Quality -----
 $fn = 80;
@@ -133,6 +148,26 @@ module handle() {
     handle_tabs();
 }
 
+// ----- Grip Collar Module -----
+
+// Ring with gear-like teeth for grip; the end piece fits inside.
+// Built as a thick ring with semicircular cutouts along the exterior.
+module grip_collar() {
+    difference() {
+        // Full-thickness ring (base + tooth region)
+        difference() {
+            cylinder(r = collar_outer_radius, h = collar_height);
+            translate([0, 0, -eps])
+                cylinder(r = collar_inner_radius, h = collar_height + 2 * eps);
+        }
+        // Cut 6 semicircular notches evenly around the exterior
+        for (i = [0 : collar_tooth_count - 1])
+            rotate([0, 0, i * (360 / collar_tooth_count) + (360 / collar_tooth_count / 2)])
+                translate([collar_outer_radius, 0, -eps])
+                    cylinder(r = collar_cutout_radius, h = collar_height + 2 * eps);
+    }
+}
+
 // ----- Assembly -----
 if (render_end_piece)
     end_piece();
@@ -140,3 +175,7 @@ if (render_end_piece)
 if (render_handle)
     translate([0, 0, -(handle_length + tab_height + handle_gap)])
         handle();
+
+if (render_grip_collar)
+    translate([collar_outer_radius + disc_radius + 10, 0, 0])
+        grip_collar();
