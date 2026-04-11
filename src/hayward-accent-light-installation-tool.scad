@@ -15,7 +15,7 @@ dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
 render_end_piece = true;
-render_handle    = false;
+render_handle    = true;
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -47,7 +47,7 @@ slot_width      = tab_width + 2 * tab_clearance;
 slot_depth      = tab_depth + 2 * tab_clearance;
 
 // ----- Quality -----
-$fn = 180;
+$fn = 80;
 
 // ----- Component Modules -----
 

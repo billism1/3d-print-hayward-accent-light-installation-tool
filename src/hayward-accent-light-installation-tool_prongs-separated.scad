@@ -17,8 +17,8 @@ dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
 render_end_piece    = true;
-render_handle       = false;
-render_prongs       = false;
+render_handle       = true;
+render_prongs       = true;
 render_single_prong = false;  // true = render only 1 prong for printing
 
 // Handle parameters
@@ -51,7 +51,7 @@ slot_width      = tab_width + 2 * tab_clearance;
 slot_depth      = tab_depth + 2 * tab_clearance;
 
 // ----- Quality -----
-$fn = 180;
+$fn = 80;
 
 // ----- Component Modules -----
 
