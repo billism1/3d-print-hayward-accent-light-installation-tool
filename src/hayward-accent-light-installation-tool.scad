@@ -16,9 +16,15 @@ render_end_piece = true;
 render_handle    = true;
 
 // Handle parameters
-handle_diameter = 25;     // mm
+handle_diameter = 24;     // mm
 handle_length   = 80;     // mm
 handle_gap      = 2;      // mm – visual gap between handle and disc
+
+// Handle neck parameters
+neck_start      = 12;     // mm – distance from top of handle to start of neck
+neck_diameter   = 17;     // mm – narrowed diameter
+neck_length     = 15;     // mm – length of the narrow section
+neck_taper      = 6;      // mm – length of each conical transition
 
 // Interlocking tab parameters
 tab_count       = 3;
@@ -44,7 +50,7 @@ $fn = 180;
 // ----- Component Modules -----
 
 module disc() {
-    cylinder(d1 = handle_diameter, d2 = disc_diameter, h = disc_thickness);
+    cylinder(d1 = disc_diameter, d2 = disc_diameter, h = disc_thickness);
 }
 
 module prong() {
@@ -90,7 +96,21 @@ module handle_tabs() {
 }
 
 module handle() {
-    cylinder(d = handle_diameter, h = handle_length);
+    neck_bottom = handle_length - neck_start - neck_taper - neck_length - neck_taper;
+    // Top section: full diameter
+    translate([0, 0, handle_length - neck_start])
+        cylinder(d = handle_diameter, h = neck_start);
+    // Upper taper: handle_diameter -> neck_diameter
+    translate([0, 0, handle_length - neck_start - neck_taper])
+        cylinder(d1 = neck_diameter, d2 = handle_diameter, h = neck_taper);
+    // Narrow neck section
+    translate([0, 0, handle_length - neck_start - neck_taper - neck_length])
+        cylinder(d = neck_diameter, h = neck_length);
+    // Lower taper: handle_diameter -> neck_diameter
+    translate([0, 0, neck_bottom])
+        cylinder(d1 = handle_diameter, d2 = neck_diameter, h = neck_taper);
+    // Bottom section: full diameter
+    cylinder(d = handle_diameter, h = neck_bottom);
     handle_tabs();
 }
 
