@@ -38,7 +38,11 @@ collar_height          = 22;     // mm – height when printed flat on bed
 collar_tooth_count     = 6;      // number of gear-like grip teeth
 collar_ledge_width     = 10;     // mm – radial width of the prong ledge ring on top
 collar_ledge_height    = 3;      // mm – height the ledge extrudes above the collar
-collar_tooth_taper_h   = 12;     // mm – height of 45° taper on bottom of teeth (= tooth thickness)
+collar_tooth_taper_h   = 13;     // mm – height of 45° taper on bottom of teeth (= tooth thickness)
+
+// Collar lip parameters (retention lip on bottom inside)
+collar_lip_height      = 2;      // mm – height of the lip
+collar_lip_thickness   = 2;      // mm – radial extent inward from inner diameter
 
 // Collar prong parameters
 collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
@@ -195,6 +199,12 @@ module grip_collar() {
                 cylinder(r1 = collar_base_outer_radius, r2 = collar_outer_radius,
                          h = collar_tooth_taper_h + eps);
             }
+    }
+    // Retention lip: ring on bottom inside of collar
+    difference() {
+        cylinder(r = collar_inner_radius, h = collar_lip_height);
+        translate([0, 0, -eps])
+            cylinder(r = collar_inner_radius - collar_lip_thickness, h = collar_lip_height + 2 * eps);
     }
     // Prong ledge: ring on top (+Z) surface for arced prongs
     translate([0, 0, collar_height])
