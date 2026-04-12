@@ -50,6 +50,7 @@ collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
 collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
 collar_prong_count     = 3;      // number of prongs, evenly spaced
 collar_prong_ring_od   = 100;    // mm – outer diameter of the hypothetical ring defining arc curvature
+collar_prong_length    = 5;      // mm – radial length of each prong arc
 
 // Interlocking tab parameters
 tab_count       = 3;
@@ -81,8 +82,9 @@ collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular c
 // Collar prong derived dimensions
 collar_prong_ring_or = collar_prong_ring_od / 2;                       // 50 mm
 collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;  // 47.5 mm
-// Offset the ring center so its near-side arc sits at the collar bore inner edge
-collar_prong_ring_offset = collar_inner_radius + collar_prong_ring_or;
+// Ring center placed so the arc bottom sits at the radial midpoint of the prong,
+// with tangent in the radial direction (perpendicular to circumference).
+collar_prong_mid_r = collar_inner_radius + collar_prong_length / 2;
 
 // ----- Quality -----
 $fn = 180;
@@ -220,19 +222,30 @@ module grip_collar() {
     collar_prongs();
 }
 
-// A single prong arc: intersection of a large offset ring with the ledge footprint.
-// The ring is centered along +X so its near-side arc curves across the ledge inner edge.
+// A single prong arc: a short radial arc perpendicular to the collar circumference.
+// The hypothetical ring is centered tangentially (along Y) so its arc crosses the
+// ledge in the radial (+X) direction, then clipped to collar_prong_length.
+// A narrow Y-band clip keeps only the single arc at the bottom of the ring.
 module collar_prong() {
     intersection() {
-        // Hypothetical ring offset along +X
-        translate([collar_prong_ring_offset, 0, 0])
+        // Ring centered above the prong midpoint so the arc is radial
+        translate([collar_prong_mid_r, collar_prong_ring_or, 0])
             difference() {
                 cylinder(r = collar_prong_ring_or, h = collar_prong_height);
                 translate([0, 0, -eps])
                     cylinder(r = collar_prong_ring_ir, h = collar_prong_height + 2 * eps);
             }
-        // Clip to the ledge footprint
-        cylinder(r = collar_inner_radius + collar_ledge_width, h = collar_prong_height);
+        // Clip to an annular band: inner edge of ledge outward by prong length
+        difference() {
+            cylinder(r = collar_inner_radius + collar_prong_length, h = collar_prong_height);
+            translate([0, 0, -eps])
+                cylinder(r = collar_inner_radius, h = collar_prong_height + 2 * eps);
+        }
+        // Clip Y to keep only the single arc near Y=0
+        translate([0, -collar_prong_thickness, 0])
+            cube([collar_inner_radius + collar_prong_length + eps,
+                  collar_prong_thickness * 2,
+                  collar_prong_height]);
     }
 }
 
