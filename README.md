@@ -82,13 +82,13 @@ Printing small structural features like prongs **separately** and orienting them
 
 ![Hand tool with epoxied prongs — Fiberon PA612-CF](images/hand-tool_epoxied-prongs_PA612-CF-filament.jpg)
 
-The final working version of the hand tool, printed in **Fiberon PA612-CF** filament. The prongs were printed separately with layer lines running lengthwise, then epoxied into the designed slots on the end piece and left to cure overnight. This is the version that successfully survived the ColorLogic module replacement.
+The final working version of the hand tool, printed in **Fiberon PA612-CF** nylon carbon fiber filament. The prongs were printed separately with layer lines running lengthwise, then epoxied into the designed slots on the end piece and left to cure overnight. This is the version that successfully survived the ColorLogic module replacement.
 
 #### 3D Printed End Piece in Manufacturer Collar Grip
 
 ![Hand tool end piece seated in manufacturer collar grip](images/hand-tool-in-collar-grip.jpg)
 
-The 3D-printed end piece (Fiberon PA612-CF) seated inside the **original manufacturer-supplied collar grip**, demonstrating compatibility. Since the OEM collar didn't break during use, only the handle and end piece needed to be reprinted.
+The 3D-printed end piece (printed in **Fiberon PA612-CF** filament) seated inside the **original manufacturer-supplied collar grip**, demonstrating compatibility. Since the OEM collar didn't break during use, only the handle and end piece needed to be reprinted.
 
 ### Assembly Notes (Separated Prongs Model)
 
