@@ -51,7 +51,7 @@ tab_width       = 5;      // mm – width tangentially
 tab_depth       = 4;      // mm – radial depth of each tab
 tab_height      = 6;      // mm – how far tabs protrude into the disc
 tab_radial_pos  = 8;      // mm – distance from center to tab center
-tab_clearance   = 0.15;   // mm – press-fit tolerance per side
+tab_clearance   = 0.35;   // mm – press-fit tolerance per side
 
 // ----- Derived Dimensions -----
 disc_radius     = disc_diameter / 2;
@@ -141,7 +141,7 @@ module handle_tabs() {
             translate([tab_radial_pos - tab_depth / 2,
                        -tab_width / 2,
                        handle_length])
-                cube([tab_depth, tab_width, tab_height]);
+                cube([tab_depth - tab_clearance, tab_width - tab_clearance, tab_height]);
 }
 
 module handle() {
