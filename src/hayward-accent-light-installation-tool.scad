@@ -49,7 +49,7 @@ collar_lip_thickness   = 2;      // mm – radial extent inward from inner diame
 collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
 collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
 collar_prong_count     = 3;      // number of prongs, evenly spaced
-collar_prong_ring_od   = 50;     // mm – outer diameter of the hypothetical ring defining arc curvature
+collar_prong_ring_od   = 30;     // mm – outer diameter of the hypothetical ring defining arc curvature
 collar_prong_length    = 5;      // mm – radial length of each prong arc
 
 // Interlocking tab parameters
@@ -80,12 +80,12 @@ collar_outer_radius_bottom = collar_base_outer_radius_bottom + collar_tooth_thic
 collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular cutout
 
 // Collar prong derived dimensions
-collar_prong_ring_or = collar_prong_ring_od / 2;                       // 50 mm
-collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;  // 47.5 mm
-// Ring center placed so the arc is at the radial center of the ledge,
-// with tangent in the radial direction (perpendicular to circumference).
-collar_prong_mid_r = collar_inner_radius + collar_ledge_width / 2;
-collar_prong_inset = (collar_ledge_width - collar_prong_length) / 2;  // radial offset to center prongs on ledge
+collar_prong_ring_or = collar_prong_ring_od / 2;
+collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;
+// Radial center of the ledge, where prongs sit
+collar_prong_center_r = collar_inner_radius + collar_ledge_width / 2;
+// Arc angle derived from the hypothetical ring curvature and desired prong length
+collar_prong_arc_deg = (collar_prong_length / collar_prong_ring_or) * (180 / PI);
 
 // ----- Quality -----
 $fn = 180;
@@ -223,31 +223,20 @@ module grip_collar() {
     collar_prongs();
 }
 
-// A single prong arc: a short radial arc perpendicular to the collar circumference.
-// The hypothetical ring is centered tangentially (along Y) so its arc crosses the
-// ledge in the radial (+X) direction, then clipped to collar_prong_length.
-// A narrow Y-band clip keeps only the single arc at the bottom of the ring.
+// A single prong arc using rotate_extrude for clean curved faces on both sides.
+// Built at origin sweeping around Z, then rotated -90° and translated so the
+// arc runs radially on the collar ledge with its midpoint at collar_prong_center_r.
 module collar_prong() {
-    intersection() {
-        // Ring centered below the prong midpoint (–Y) so the arc bows inward
-        translate([collar_prong_mid_r, -collar_prong_ring_or, 0])
-            difference() {
-                cylinder(r = collar_prong_ring_or, h = collar_prong_height);
-                translate([0, 0, -eps])
-                    cylinder(r = collar_prong_ring_ir, h = collar_prong_height + 2 * eps);
-            }
-        // Clip to an annular band: centered on ledge
-        difference() {
-            cylinder(r = collar_inner_radius + collar_prong_inset + collar_prong_length, h = collar_prong_height);
-            translate([0, 0, -eps])
-                cylinder(r = collar_inner_radius + collar_prong_inset, h = collar_prong_height + 2 * eps);
-        }
-        // Clip Y to keep only the single arc near Y=0
-        translate([0, -collar_prong_thickness, 0])
-            cube([collar_inner_radius + collar_prong_inset + collar_prong_length + eps,
-                  collar_prong_thickness * 2,
-                  collar_prong_height]);
-    }
+    // After rotate_extrude + centering, the arc midpoint is at (ring_mid, 0).
+    // rotate -90° moves midpoint to (0, -ring_mid), tangent becomes +X (radial).
+    // Then translate places midpoint at (collar_prong_center_r, 0).
+    ring_mid = collar_prong_ring_or - collar_prong_thickness / 2;
+    translate([collar_prong_center_r, -ring_mid, 0])
+        rotate([0, 0, 90])
+            rotate([0, 0, -collar_prong_arc_deg / 2])
+                rotate_extrude(angle = collar_prong_arc_deg)
+                    translate([collar_prong_ring_or - collar_prong_thickness, 0])
+                        square([collar_prong_thickness, collar_prong_height]);
 }
 
 module collar_prongs() {
