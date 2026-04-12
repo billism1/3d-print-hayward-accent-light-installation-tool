@@ -51,6 +51,7 @@ collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
 collar_prong_count     = 3;      // number of prongs, evenly spaced
 collar_prong_ring_od   = 30;     // mm – outer diameter of the hypothetical ring defining arc curvature
 collar_prong_length    = 5;      // mm – radial length of each prong arc
+collar_prong_tilt      = 12.5;     // degrees – clockwise tilt (outer end leads CW viewed from top)
 
 // Interlocking tab parameters
 tab_count       = 3;
@@ -231,8 +232,12 @@ module collar_prong() {
     // rotate -90° moves midpoint to (0, -ring_mid), tangent becomes +X (radial).
     // Then translate places midpoint at (collar_prong_center_r, 0).
     ring_mid = collar_prong_ring_or - collar_prong_thickness / 2;
-    translate([collar_prong_center_r, -ring_mid, 0])
-        rotate([0, 0, 90])
+    // Tilt the prong around its own radial center so outer end leads CW
+    translate([collar_prong_center_r, 0, 0])
+        rotate([0, 0, -collar_prong_tilt])
+            translate([-collar_prong_center_r, 0, 0])
+                translate([collar_prong_center_r, -ring_mid, 0])
+                    rotate([0, 0, 90])
             rotate([0, 0, -collar_prong_arc_deg / 2])
                 rotate_extrude(angle = collar_prong_arc_deg)
                     translate([collar_prong_ring_or - collar_prong_thickness, 0])
