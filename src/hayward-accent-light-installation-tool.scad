@@ -49,7 +49,7 @@ collar_lip_thickness   = 2;      // mm – radial extent inward from inner diame
 collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
 collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
 collar_prong_count     = 3;      // number of prongs, evenly spaced
-collar_prong_ring_od   = 100;    // mm – outer diameter of the hypothetical ring defining arc curvature
+collar_prong_ring_od   = 50;     // mm – outer diameter of the hypothetical ring defining arc curvature
 collar_prong_length    = 5;      // mm – radial length of each prong arc
 
 // Interlocking tab parameters
@@ -229,8 +229,8 @@ module grip_collar() {
 // A narrow Y-band clip keeps only the single arc at the bottom of the ring.
 module collar_prong() {
     intersection() {
-        // Ring centered above the prong midpoint so the arc is radial
-        translate([collar_prong_mid_r, collar_prong_ring_or, 0])
+        // Ring centered below the prong midpoint (–Y) so the arc bows inward
+        translate([collar_prong_mid_r, -collar_prong_ring_or, 0])
             difference() {
                 cylinder(r = collar_prong_ring_or, h = collar_prong_height);
                 translate([0, 0, -eps])
