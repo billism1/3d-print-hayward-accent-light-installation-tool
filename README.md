@@ -17,6 +17,15 @@ The tool operates in two steps:
 
 The tool consists of two main components: the **handle** (with an interlocking end piece) and the **grip collar**.
 
+## Light Module Reference
+
+![Hayward ColorLogic LED module face](images/hayward-colorlogic-led-module-face.jpg)
+
+The face of a Hayward ColorLogic LED accent light module. Two sets of slots are visible on the outer ring:
+
+- **Inner ring slots (3×, smaller)** — These are the notches where the **end piece prongs** engage. The tool's end piece sits over the convex lens, and its three prongs drop into these inner slots.
+- **Outer ring slots (3×, short curved)** — Located on the outermost edge of the assembly, these smaller curved slots are where the **grip collar prongs** engage. The collar sits over the outer ring and its tilted arced prongs seat into these exterior slots to provide the twist leverage for locking/unlocking the light.
+
 ## Design Renders
 
 ### Handle with End Piece (Standard — Integrated Prongs)
