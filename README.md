@@ -76,6 +76,20 @@ All prints were done on a **Bambu Lab P1S**.
 
 Printing small structural features like prongs **separately** and orienting them so that layer lines run parallel to the load direction provides far superior strength compared to printing them in-place. Even a high-performance filament like Nylon CF couldn't overcome the inherent inter-layer weakness of FDM when the prongs were printed as part of the larger piece.
 
+### Printed Tool Photos
+
+#### Finished Hand Tool (Separated Prongs, Epoxied)
+
+![Hand tool with epoxied prongs — Fiberon PA612-CF](images/hand-tool_epoxied-prongs_PA612-CF-filament.jpg)
+
+The final working version of the hand tool, printed in **Fiberon PA612-CF** filament. The prongs were printed separately with layer lines running lengthwise, then epoxied into the designed slots on the end piece and left to cure overnight. This is the version that successfully survived the ColorLogic module replacement.
+
+#### 3D Printed End Piece in Manufacturer Collar Grip
+
+![Hand tool end piece seated in manufacturer collar grip](images/hand-tool-in-collar-grip.jpg)
+
+The 3D-printed end piece (Fiberon PA612-CF) seated inside the **original manufacturer-supplied collar grip**, demonstrating compatibility. Since the OEM collar didn't break during use, only the handle and end piece needed to be reprinted.
+
 ### Assembly Notes (Separated Prongs Model)
 
 1. Print the end piece and individual prongs separately.
