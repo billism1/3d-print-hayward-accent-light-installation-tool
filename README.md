@@ -17,6 +17,32 @@ The tool operates in two steps:
 
 The tool consists of two main components: the **handle** (with an interlocking end piece) and the **grip collar**.
 
+## Design Renders
+
+### Handle with End Piece (Standard — Integrated Prongs)
+
+![Handle with end piece — standard model](images/handle_openscad-snippet.png)
+
+The handle and end piece shown as a single assembly. The concave dish on top cradles the light fixture, and three integrated prongs extend from the disc edge to engage the light's outer ring. The handle features a narrowed neck section for ergonomic grip.
+
+### Handle with End Piece (Separate Components)
+
+![Handle and end piece — separate components](images/handle-separate-components_openscad-snippet.png)
+
+The handle and end piece shown as separate printable parts. The interlocking tab system between the handle top and the disc underside is visible. The prongs here are still integrated into the end piece.
+
+### Handle with End Piece (Separated Prongs Variant)
+
+![Handle and end piece — separated prongs variant](images/handle-separate-components_separated-prongs_openscad-snippet.png)
+
+The improved separated prongs design. The end piece has three prong slots cut into it, and the individual prongs are printed separately alongside. This allows the prongs to be printed with layer lines running along their length for maximum inter-layer tensile strength, then epoxied into the slots.
+
+### Grip Collar
+
+![Grip collar](images/collar_openscad-snippet.png)
+
+The grip collar viewed from above. Features six gear-like teeth with semicircular cutouts for hand grip, a prong ledge ring on top with three tilted arced prongs, and a retention lip on the bottom inside edge.
+
 ## Design Variants
 
 ### Standard Model (`hayward-accent-light-installation-tool.scad`)
