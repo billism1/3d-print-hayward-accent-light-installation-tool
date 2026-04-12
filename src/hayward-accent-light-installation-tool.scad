@@ -14,10 +14,10 @@ prong_count     = 3;
 dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
-render_end_piece  = true;
-render_handle     = true;
+render_end_piece  = false;
+render_handle     = false;
 render_grip_collar = true;
-render_combined   = true;  // true = union end piece + handle as one solid object
+render_combined   = false;  // true = union end piece + handle as one solid object
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -47,7 +47,7 @@ collar_lip_thickness   = 2;      // mm – radial extent inward from inner diame
 
 // Collar prong parameters
 collar_prong_height    = 3.5;    // mm – height of prongs above the ledge
-collar_prong_thickness = 2.5;    // mm – wall thickness of each prong arc
+collar_prong_thickness = 2;    // mm – wall thickness of each prong arc
 collar_prong_count     = 3;      // number of prongs, evenly spaced
 collar_prong_ring_od   = 30;     // mm – outer diameter of the hypothetical ring defining arc curvature
 collar_prong_length    = 5;      // mm – radial length of each prong arc
