@@ -17,10 +17,11 @@ dish_depth      = 3;      // mm – how deep the concavity is
 render_end_piece  = true;
 render_handle     = true;
 render_grip_collar = true;
+render_combined   = false;  // true = union end piece + handle as one solid object
 
 // Handle parameters
 handle_diameter = 24;     // mm
-handle_length   = 50;     // mm
+handle_length   = 80;     // mm
 handle_gap      = 2;      // mm – visual gap between handle and disc
 
 // Handle neck parameters
@@ -51,7 +52,7 @@ tab_width       = 5;      // mm – width tangentially
 tab_depth       = 4;      // mm – radial depth of each tab
 tab_height      = 6;      // mm – how far tabs protrude into the disc
 tab_radial_pos  = 8;      // mm – distance from center to tab center
-tab_clearance   = 0.35;   // mm – press-fit tolerance per side
+tab_clearance   = render_combined ? 0.0 : 0.35;   // mm – press-fit tolerance per side (0 when combined)
 
 // ----- Derived Dimensions -----
 disc_radius     = disc_diameter / 2;
@@ -224,12 +225,20 @@ module collar_prongs() {
 }
 
 // ----- Assembly -----
-if (render_end_piece)
-    end_piece();
+if (render_combined) {
+    union() {
+        end_piece();
+        translate([0, 0, -(handle_length)])
+            handle();
+    }
+} else {
+    if (render_end_piece)
+        end_piece();
 
-if (render_handle)
-    translate([0, 0, -(handle_length + tab_height + handle_gap)])
-        handle();
+    if (render_handle)
+        translate([0, 0, -(handle_length + tab_height + handle_gap)])
+            handle();
+}
 
 if (render_grip_collar)
     translate([collar_outer_radius + disc_radius + 10, 0, 0])
