@@ -14,8 +14,8 @@ prong_count     = 3;
 dish_depth      = 3;      // mm – how deep the concavity is
 
 // Render toggles
-render_end_piece  = false;
-render_handle     = false;
+render_end_piece  = true;
+render_handle     = true;
 render_grip_collar = true;
 render_combined   = false;  // true = union end piece + handle as one solid object
 
@@ -89,7 +89,7 @@ collar_prong_center_r = collar_inner_radius + collar_ledge_width / 2;
 collar_prong_arc_deg = (collar_prong_length / collar_prong_ring_or) * (180 / PI);
 
 // ----- Quality -----
-$fn = 180;
+$fn = 80;
 
 // ----- Component Modules -----
 
