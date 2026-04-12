@@ -82,9 +82,10 @@ collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular c
 // Collar prong derived dimensions
 collar_prong_ring_or = collar_prong_ring_od / 2;                       // 50 mm
 collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;  // 47.5 mm
-// Ring center placed so the arc bottom sits at the radial midpoint of the prong,
+// Ring center placed so the arc is at the radial center of the ledge,
 // with tangent in the radial direction (perpendicular to circumference).
-collar_prong_mid_r = collar_inner_radius + collar_prong_length / 2;
+collar_prong_mid_r = collar_inner_radius + collar_ledge_width / 2;
+collar_prong_inset = (collar_ledge_width - collar_prong_length) / 2;  // radial offset to center prongs on ledge
 
 // ----- Quality -----
 $fn = 180;
@@ -235,15 +236,15 @@ module collar_prong() {
                 translate([0, 0, -eps])
                     cylinder(r = collar_prong_ring_ir, h = collar_prong_height + 2 * eps);
             }
-        // Clip to an annular band: inner edge of ledge outward by prong length
+        // Clip to an annular band: centered on ledge
         difference() {
-            cylinder(r = collar_inner_radius + collar_prong_length, h = collar_prong_height);
+            cylinder(r = collar_inner_radius + collar_prong_inset + collar_prong_length, h = collar_prong_height);
             translate([0, 0, -eps])
-                cylinder(r = collar_inner_radius, h = collar_prong_height + 2 * eps);
+                cylinder(r = collar_inner_radius + collar_prong_inset, h = collar_prong_height + 2 * eps);
         }
         // Clip Y to keep only the single arc near Y=0
         translate([0, -collar_prong_thickness, 0])
-            cube([collar_inner_radius + collar_prong_length + eps,
+            cube([collar_inner_radius + collar_prong_inset + collar_prong_length + eps,
                   collar_prong_thickness * 2,
                   collar_prong_height]);
     }
