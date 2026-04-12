@@ -82,8 +82,14 @@ $fn = 80;
 
 // ----- Component Modules -----
 
+disc_taper_height = 1;    // mm – height of conical taper at bottom of disc
+
 module disc() {
-    cylinder(d1 = disc_diameter, d2 = disc_diameter, h = disc_thickness);
+    // Bottom cone: tapers from handle_diameter up to disc_diameter
+    cylinder(d1 = handle_diameter, d2 = disc_diameter, h = disc_taper_height);
+    // Remaining straight cylinder
+    translate([0, 0, disc_taper_height])
+        cylinder(d = disc_diameter, h = disc_thickness - disc_taper_height);
 }
 
 module prong() {
