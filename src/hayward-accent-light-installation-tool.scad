@@ -32,7 +32,8 @@ neck_taper      = 6;      // mm – length of each conical transition
 
 // Grip collar parameters
 collar_inner_diameter  = 32;     // mm – inside diameter (end piece sits inside)
-collar_base_thickness  = 10;     // mm – base ring wall thickness
+collar_base_thickness  = 10;     // mm – base ring wall thickness at top
+collar_base_thickness_bottom = 4; // mm – base ring wall thickness at bottom
 collar_tooth_thickness = 10;     // mm – additional thickness for gear-tooth region
 collar_height          = 22;     // mm – height when printed flat on bed
 collar_tooth_count     = 6;      // number of gear-like grip teeth
@@ -72,7 +73,9 @@ slot_depth      = tab_depth + 2 * tab_clearance;
 collar_inner_radius = collar_inner_diameter / 2;
 collar_total_thickness = collar_base_thickness + collar_tooth_thickness;
 collar_outer_radius = collar_inner_radius + collar_total_thickness;  // full outer radius including teeth
-collar_base_outer_radius = collar_inner_radius + collar_base_thickness; // outer radius of base ring
+collar_base_outer_radius = collar_inner_radius + collar_base_thickness; // outer radius of base ring at top
+collar_base_outer_radius_bottom = collar_inner_radius + collar_base_thickness_bottom; // outer radius of base ring at bottom
+collar_outer_radius_bottom = collar_base_outer_radius_bottom + collar_tooth_thickness; // full outer radius at bottom
 collar_cutout_radius = collar_tooth_thickness;  // radius of each semicircular cutout
 
 // Collar prong derived dimensions
@@ -181,9 +184,9 @@ module handle() {
 module grip_collar() {
     // Main collar body with gear teeth
     difference() {
-        // Full-thickness ring (base + tooth region)
+        // Full-thickness tapered ring (base + tooth region)
         difference() {
-            cylinder(r = collar_outer_radius, h = collar_height);
+            cylinder(r1 = collar_outer_radius_bottom, r2 = collar_outer_radius, h = collar_height);
             translate([0, 0, -eps])
                 cylinder(r = collar_inner_radius, h = collar_height + 2 * eps);
         }
@@ -196,7 +199,7 @@ module grip_collar() {
         translate([0, 0, -eps])
             difference() {
                 cylinder(r = collar_outer_radius + eps, h = collar_tooth_taper_h + eps);
-                cylinder(r1 = collar_base_outer_radius, r2 = collar_outer_radius,
+                cylinder(r1 = collar_base_outer_radius_bottom, r2 = collar_outer_radius,
                          h = collar_tooth_taper_h + eps);
             }
     }
