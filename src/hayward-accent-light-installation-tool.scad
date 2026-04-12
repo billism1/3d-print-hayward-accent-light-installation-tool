@@ -17,7 +17,7 @@ dish_depth      = 3;      // mm – how deep the concavity is
 render_end_piece  = true;
 render_handle     = true;
 render_grip_collar = true;
-render_combined   = false;  // true = union end piece + handle as one solid object
+render_combined   = true;  // true = union end piece + handle as one solid object
 
 // Handle parameters
 handle_diameter = 24;     // mm
@@ -78,7 +78,7 @@ collar_prong_ring_ir = collar_prong_ring_or - collar_prong_thickness;  // 47.5 m
 collar_prong_ring_offset = collar_inner_radius + collar_prong_ring_or;
 
 // ----- Quality -----
-$fn = 80;
+$fn = 180;
 
 // ----- Component Modules -----
 
