@@ -10,7 +10,7 @@ This is a 3D-printable alternative to the **Hayward SP0536CTOOL**, the manufactu
 
 Profiles 1 and 2 both print the **hand tool: the end piece *and* the handle**. The handle has extension pieces (tabs) that insert into matching slots in the underside of the end piece to hold the two together. I epoxied mine, but I also ran it *without* epoxying the handle to the end piece and it held up fine — the tabs alone keep them together. So epoxy on the handle joint is optional; glue it only if you want it permanent.
 
-Profile 3 is the grip collar, broken out on its own because you may not need it — print it only if your OEM collar didn't survive.
+Profile 3 is the grip collar, broken out on its own because you may not need it — print it only if your OEM collar didn't survive. Mine survived. I designed and printed one anyway, because at that point I was emotionally committed to the bit.
 
 **Profile 1: Separated Prongs (Stronger, Recommended)**
 The end piece prints with three prong slots. The three prongs print separately, lying flat on the bed so their layer lines run along their length. You epoxy the prongs into the slots. Stronger because the strong axis of each layer is now aligned with the torque, instead of fighting it across layer bonds. The handle prints separately and its tabs insert into the end piece (epoxy on that joint optional).
@@ -18,8 +18,8 @@ The end piece prints with three prong slots. The three prongs print separately, 
 **Profile 2: Integrated Prongs (Simpler)**
 The end piece prints as one part with the prongs as integrated features. Fewer pieces, no prong epoxy step, faster to assemble. The trade-off is the inter-layer weakness. Even Nylon CF couldn't fully overcome it in my testing. Fine for a one-time removal or a backup. If you just need to get the light out today, this is the fastest path. The handle still prints separately and its tabs insert into the end piece (epoxy on that joint optional).
 
-**Profile 3: Grip Collar (Optional — Print Only If Needed)**
-Just the grip collar, on its own. Six gear-style teeth for hand grip, a retention lip, and three tilted arced prongs that engage the outer ring slots on the light. Print this only if your OEM Hayward collar broke — the printed end piece drops into the original collar fine. Print it by itself or alongside Profile 1 or 2.
+**Profile 3: Grip Collar (Optional — Print Only If Needed, Or If You're Like Me)**
+Just the grip collar, on its own. Six gear-style teeth for hand grip, a retention lip, and three tilted arced prongs that engage the outer ring slots on the light. Print this only if your OEM Hayward collar broke — the printed end piece drops into the original collar fine. My OEM collar was perfectly intact. I designed this one anyway. No regrets. Print it by itself or alongside Profile 1 or 2.
 
 ## What's Included
 
@@ -76,7 +76,7 @@ Replaces: Hayward SP0536CTOOL
 
 ## Notes
 
-The grip collar has its own set of prongs and could probably benefit from the same separated-prong treatment, but mine didn't break, so I haven't designed that variant yet. Eventually, maybe.
+The grip collar has its own set of prongs and could probably benefit from the same separated-prong treatment, but mine didn't break, so I haven't designed that variant yet. Yes, I designed a whole replacement collar for a part that was working fine, and no, I will not be explaining the separated-prong variant I didn't make for the collar I didn't need. Eventually, maybe.
 
 Pool equipment involves water-tight seals and electrical components. Verify fit before relying on this for anything permanent, and use at your own risk. If a prong shears mid-twist you'll know which profile you should have picked.
 
