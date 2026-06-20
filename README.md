@@ -6,6 +6,32 @@ A 3D-printable replacement for the **Hayward SP0536CTOOL**, the manufacturer's i
 
 The original Hayward SP0536CTOOL broke during a light removal in my pool, and I didn't want to wait for a replacement. Rather than being stuck, I designed and printed my own version. This repo contains the OpenSCAD source files and ready-to-print exports for the alternative tool.
 
+## The Finished Tool
+
+### Finished Hand Tool (Separated Prongs, Epoxied)
+
+![Hand tool with epoxied prongs — Fiberon PA612-CF](images/hand-tool_epoxied-prongs_PA612-CF-filament.jpg)
+
+The final working version of the hand tool, printed in **Fiberon PA612-CF** nylon carbon fiber filament. The prongs were printed separately with layer lines running lengthwise, then epoxied into the designed slots on the end piece and left to cure overnight. This is the version that successfully survived the ColorLogic module replacement.
+
+### 3D Printed Grip Collar
+
+![3D printed grip collar](images/collar-grip01.jpg)
+
+The grip collar printed and in hand. Six gear-like teeth with semicircular cutouts give a positive grip for applying twist, and the tilted arced prongs on the top ledge engage the light's outer ring slots.
+
+### Hand Tool in 3D Printed Collar Grip
+
+![Hand tool seated in 3D printed collar grip](images/hand-tool-in-collar-grip-all-printed.jpg)
+
+The fully 3D-printed assembly — the printed hand tool end piece seated inside the **printed grip collar** (both in Fiberon PA612-CF). This is the all-printed counterpart to the manufacturer-collar photo below, confirming the printed collar mates with the handle and end piece.
+
+### 3D Printed End Piece in Manufacturer Collar Grip
+
+![Hand tool end piece seated in manufacturer collar grip](images/hand-tool-in-collar-grip.jpg)
+
+The 3D-printed end piece (printed in **Fiberon PA612-CF** filament) seated inside the **original manufacturer-supplied collar grip**, demonstrating compatibility. Since the OEM collar didn't break during use, only the handle and end piece needed to be reprinted.
+
 ## How the Tool Works
 
 The Hayward ColorLogic accent lights mount into standard wall fittings (such as the **SP0537** or **SP0538**) using a **compression fitting**. The tool engages the light's outer ring and twists to expand or release the mounting ring inside the wall fitting.
@@ -21,10 +47,10 @@ The tool consists of two main components: the **handle** (with an interlocking e
 
 ![Hayward ColorLogic LED module face](images/hayward-colorlogic-led-module-face.jpg)
 
-The face of a Hayward ColorLogic LED accent light module. Two sets of slots are visible on the outer ring:
+The face of a Hayward ColorLogic LED accent light module. The light has two concentric parts that the tool engages — the clear glass lens dome in the center (covering the LED board) and the gray plastic mounting ring around it. Two sets of slots are used:
 
-- **Inner ring slots (3×, smaller)** — These are the notches where the **end piece prongs** engage. The tool's end piece sits over the convex lens, and its three prongs drop into these inner slots.
-- **Outer ring slots (3×, short curved)** — Located on the outermost edge of the assembly, these smaller curved slots are where the **grip collar prongs** engage. The collar sits over the outer ring and its tilted arced prongs seat into these exterior slots to provide the twist leverage for locking/unlocking the light.
+- **Glass lens notches (3×)** — Cut into the clear glass lens dome surrounding the LED board, not the gray ring. The tool's end piece sits over the convex lens and its three prongs drop into these notches.
+- **Gray ring slots (3×, short curved)** — Located on the outer gray mounting ring, these short curved slots are where the **grip collar prongs** engage. The collar sits over the gray ring and its tilted arced prongs seat into these slots to provide the twist leverage for locking/unlocking the light.
 
 ## Design Renders
 
@@ -76,21 +102,7 @@ All prints were done on a **Bambu Lab P1S**.
 
 Printing small structural features like prongs **separately** and orienting them so that layer lines run parallel to the load direction provides far superior strength compared to printing them in-place. Even a high-performance filament like Nylon CF couldn't overcome the inherent inter-layer weakness of FDM when the prongs were printed as part of the larger piece.
 
-### Printed Tool Photos
-
-#### Finished Hand Tool (Separated Prongs, Epoxied)
-
-![Hand tool with epoxied prongs — Fiberon PA612-CF](images/hand-tool_epoxied-prongs_PA612-CF-filament.jpg)
-
-The final working version of the hand tool, printed in **Fiberon PA612-CF** nylon carbon fiber filament. The prongs were printed separately with layer lines running lengthwise, then epoxied into the designed slots on the end piece and left to cure overnight. This is the version that successfully survived the ColorLogic module replacement.
-
-#### 3D Printed End Piece in Manufacturer Collar Grip
-
-![Hand tool end piece seated in manufacturer collar grip](images/hand-tool-in-collar-grip.jpg)
-
-The 3D-printed end piece (printed in **Fiberon PA612-CF** filament) seated inside the **original manufacturer-supplied collar grip**, demonstrating compatibility. Since the OEM collar didn't break during use, only the handle and end piece needed to be reprinted.
-
-### Assembly Notes (Separated Prongs Model)
+## Assembly Notes (Separated Prongs Model)
 
 1. Print the end piece and individual prongs separately.
 2. Apply epoxy to the prong slots and insert the prongs.
