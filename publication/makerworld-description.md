@@ -2,7 +2,7 @@
 
 A 3D-Printable Replacement for the Hayward SP0536CTOOL
 
-Yeah, so the Hayward provided tool for replacing ColorLogc accent lights broke mid-removal, with the light still in the wall. Could have ordered another one and waited. Instead I broke a few prototypes reinforcing what I already know about FDM layer orientation actually matters for small peices, and ended up with a tool that survived the job. Two print profiles below. Pick the one that fits how much epoxy you feel like dealing with.
+Yeah, so the Hayward provided tool for replacing ColorLogic accent lights broke mid-removal, with the light still in the wall. Could have ordered another one and waited. Instead I broke a few prototypes, reinforcing what I already know about FDM layer orientation: it actually matters for small pieces, and ended up with a tool that survived the job. Two print profiles below. Pick the one that fits how much epoxy you feel like dealing with.
 
 This is a 3D-printable alternative to the **Hayward SP0536CTOOL**, the manufacturer's installation and removal tool for **ColorLogic 160 and 320** accent lights. The tool engages the light's outer ring and twists to expand or release the internal mounting ring inside a standard wall fitting (SP0537, SP0538).
 
