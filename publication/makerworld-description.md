@@ -1,18 +1,20 @@
-# Hayward ColorLogic Accent Light Installation & Removal Tool
+# 3D-Printed Accent Light Installation & Removal Tool: Compatible with Hayward ColorLogic
 
-A 3D-Printable Replacement for the Hayward SP0536CTOOL
+An independently designed 3D-printable alternative, compatible with the Hayward ColorLogic light system (replaces the function of the SP0536CTOOL).
+
+> **Disclaimer:** Independent, non-commercial project. **Not affiliated with, authorized, sponsored, or endorsed by Hayward Industries, Inc.** The names "Hayward," "ColorLogic," and "SP0536CTOOL" are used only to identify the products this tool is compatible with (nominative fair use). Hayward® and ColorLogic® are trademarks of Hayward Industries, Inc.; all trademarks are the property of their respective owners.
 
 > **Source & Documentation:** OpenSCAD source, photos, and full documentation: [github.com/billism1/3d-print-hayward-accent-light-installation-tool](https://github.com/billism1/3d-print-hayward-accent-light-installation-tool)
 
-Yeah, so the Hayward provided tool for replacing ColorLogic accent lights broke mid-removal, with the light still in the wall. Could have ordered another one and waited. Instead I broke a few prototypes, reinforcing what I already know about FDM layer orientation: it actually matters for small pieces, and ended up with a tool that survived the job. Three print profiles below: two for the hand tool (pick by how much epoxy you feel like dealing with), plus a separate one for the grip collar if yours broke too.
+Yeah, so the manufacturer's tool for replacing ColorLogic accent lights broke mid-removal, with the light still in the wall. Could have ordered another one and waited. Instead I broke a few prototypes, reinforcing what I already know about FDM layer orientation: it actually matters for small pieces, and ended up with a tool that survived the job. I designed this from measuring my own light, not from any manufacturer drawings. Three print profiles below: two for the hand tool (pick by how much epoxy you feel like dealing with), plus a separate one for the grip collar if yours broke too. Realistically, almost nobody needs this. But if your tool broke and your light is still stuck in the wall, you are exactly the person I made it for. So hello to the few of you who stumble across this, probably years from now. Small club, glad you're here.
 
-This is a 3D-printable alternative to the **Hayward SP0536CTOOL**, the manufacturer's installation and removal tool for **ColorLogic 160 and 320** accent lights. The tool engages the light's outer ring and twists to expand or release the internal mounting ring inside a standard wall fitting (SP0537, SP0538).
+This is an independently designed, 3D-printable alternative to the **SP0536CTOOL**, the manufacturer's installation and removal tool for **Hayward ColorLogic 160 and 320** accent lights. Nothing here is for sale. The tool engages the light's outer ring and twists to expand or release the internal mounting ring inside a standard wall fitting (SP0537, SP0538).
 
 ## Three Print Profiles
 
 Profiles 1 and 2 both print the **hand tool: the end piece *and* the handle**. The handle has extension pieces (tabs) that insert into matching slots in the underside of the end piece to hold the two together. I epoxied mine, but I also ran it *without* epoxying the handle to the end piece and it held up fine — the tabs alone keep them together. So epoxy on the handle joint is optional; glue it only if you want it permanent.
 
-Profile 3 is the grip collar, broken out on its own because you may not need it — print it only if your OEM collar didn't survive. Mine survived. I designed and printed one anyway, because at that point I was emotionally committed to the bit.
+Profile 3 is the grip collar, broken out on its own because you may not need it. Print it only if your OEM collar didn't survive. Mine survived. I designed and printed one anyway. Two reasons: I can't leave a set half-finished, and your collar might not be as lucky as mine.
 
 **Profile 1: Separated Prongs (Stronger, Recommended)**
 The end piece prints with three prong slots. The three prongs print separately, lying flat on the bed so their layer lines run along their length. You epoxy the prongs into the slots. Stronger because the strong axis of each layer is now aligned with the torque, instead of fighting it across layer bonds. The handle prints separately and its tabs insert into the end piece (epoxy on that joint optional).

@@ -1,5 +1,6 @@
 // ============================================================
-// Hayward ColorLogic Accent Light Installation Tool – End Piece
+// Accent Light Installation Tool (End Piece), compatible with Hayward ColorLogic 160/320
+// Independent, non-commercial project. Not affiliated with Hayward Industries, Inc.
 // ============================================================
 
 // ----- Constants & Parameters -----

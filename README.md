@@ -1,12 +1,14 @@
-# Hayward ColorLogic Accent Light Installation & Removal Tool (3D Printed Alternative)
+# 3D-Printed Accent Light Installation & Removal Tool: Compatible with Hayward® ColorLogic® 160 / 320
 
-A 3D-printable replacement for the **Hayward SP0536CTOOL**, the manufacturer's installation and removal tool for **ColorLogic 160 and 320 accent lights**.
+> **Disclaimer:** Independent, non-commercial project. **Not affiliated with, authorized, sponsored, or endorsed by Hayward Industries, Inc.** The names "Hayward," "ColorLogic," and "SP0536CTOOL" are used only to identify the products this tool is compatible with (nominative fair use). Hayward® and ColorLogic® are trademarks of Hayward Industries, Inc.; all trademarks are the property of their respective owners.
+
+An independently designed, 3D-printable tool that is a **compatible alternative to** the **SP0536CTOOL**, the manufacturer's installation and removal tool for **Hayward® ColorLogic® 160 and 320 accent lights**. The design was created by measuring my own light fixture, not from any manufacturer drawings or CAD.
 
 📦 **[View, download, or print on MakerWorld](https://makerworld.com/en/models/2957577-hayward-colorlogic-light-install-removal-tool)**
 
 ## Why This Exists
 
-The original Hayward SP0536CTOOL broke during a light removal in my pool, and I didn't want to wait for a replacement. Rather than being stuck, I designed and printed my own version. This repo contains the OpenSCAD source files and ready-to-print exports for the alternative tool.
+The original SP0536CTOOL broke during a light removal in my pool, and I didn't want to wait for a replacement. Rather than being stuck, I designed and printed my own version. Nothing here is for sale. This repo contains the OpenSCAD source files and ready-to-print exports, shared for reference.
 
 ## The Finished Tool
 
@@ -141,4 +143,6 @@ publication/
 
 ## License
 
-This is a personal project shared for reference. Use at your own risk — pool equipment installation involves water-tight seals and electrical components. Verify fit and function before relying on a 3D-printed tool for permanent installations.
+This is a personal project shared for reference under the [MIT License](LICENSE). Use at your own risk. Pool equipment installation involves water-tight seals and electrical components, so verify fit and function before relying on a 3D-printed tool for permanent installations.
+
+See [LICENSE](LICENSE) for the full trademark notice and liability disclaimer.
