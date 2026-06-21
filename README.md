@@ -2,6 +2,8 @@
 
 A 3D-printable replacement for the **Hayward SP0536CTOOL**, the manufacturer's installation and removal tool for **ColorLogic 160 and 320 accent lights**.
 
+📦 **[View, download, or print on MakerWorld](https://makerworld.com/en/models/2957577-hayward-colorlogic-light-install-removal-tool)**
+
 ## Why This Exists
 
 The original Hayward SP0536CTOOL broke during a light removal in my pool, and I didn't want to wait for a replacement. Rather than being stuck, I designed and printed my own version. This repo contains the OpenSCAD source files and ready-to-print exports for the alternative tool.
