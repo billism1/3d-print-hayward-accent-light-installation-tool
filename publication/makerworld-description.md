@@ -2,6 +2,8 @@
 
 A 3D-Printable Replacement for the Hayward SP0536CTOOL
 
+> **Source & Documentation:** OpenSCAD source, photos, and full documentation: [github.com/billism1/3d-print-hayward-accent-light-installation-tool](https://github.com/billism1/3d-print-hayward-accent-light-installation-tool)
+
 Yeah, so the Hayward provided tool for replacing ColorLogic accent lights broke mid-removal, with the light still in the wall. Could have ordered another one and waited. Instead I broke a few prototypes, reinforcing what I already know about FDM layer orientation: it actually matters for small pieces, and ended up with a tool that survived the job. Three print profiles below: two for the hand tool (pick by how much epoxy you feel like dealing with), plus a separate one for the grip collar if yours broke too.
 
 This is a 3D-printable alternative to the **Hayward SP0536CTOOL**, the manufacturer's installation and removal tool for **ColorLogic 160 and 320** accent lights. The tool engages the light's outer ring and twists to expand or release the internal mounting ring inside a standard wall fitting (SP0537, SP0538).
